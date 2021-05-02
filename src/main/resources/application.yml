@@ -1,0 +1,16 @@
+logging:
+  level:
+    com:
+      devfraz:
+          reativedemo: DEBUG
+    reactor:
+      core: DEBUG
+      util: DEBUG
+    org:
+      springframework:
+          data: DEBUG
+spring:
+  r2dbc:
+      url: r2dbc:postgresql://0.0.0.0:5432/demodb
+      username: user
+      password: password
