@@ -23,3 +23,7 @@ This is a demo to test out reactive spring boot.
     - Run command `docker-compose up -d`
     - Run command `mvn clean install`
     - Run command `mvn spring-boot:run`
+
+### API Documentation:
+
+ - [Open API](http://localhost:8080/swagger-ui.html) - Only accessible once the demo service is up.
