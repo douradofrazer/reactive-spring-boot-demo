@@ -1,46 +1,43 @@
 package com.devfraz.reactivedemo.service.impl;
 
 import com.devfraz.reactivedemo.dto.UserDto;
-import com.devfraz.reactivedemo.model.User;
+import com.devfraz.reactivedemo.mapper.UserMapper;
 import com.devfraz.reactivedemo.repository.UserRepository;
 import com.devfraz.reactivedemo.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
+  private final UserMapper userMapper;
 
   private final UserRepository userRepository;
 
   @Override
   public Mono<Void> createUser(UserDto userDto) {
-    var user = new User();
-    user.setFirstName(userDto.getFirstName());
-    user.setLastName(userDto.getLastName());
-    user.setEmail(userDto.getEmail());
-    return userRepository.save(user).then();
+    var user = userMapper.userDtoToUser(userDto);
+    return userRepository.save(user).log("Saving user to db..").then();
   }
 
   @Override
   public Flux<UserDto> listAllUsers() {
     return userRepository
         .findAll()
-        .map(
-            user ->
-                new UserDto(
-                    user.getId(), user.getFirstName(), user.getLastName(), user.getEmail()));
+        .log("Fetched all users from db")
+        .map(userMapper::userToUserDto)
+        .log("Mapped users to userDto");
   }
 
   @Override
   public Mono<UserDto> getUserById(Integer id) {
     return userRepository
         .findById(id)
-        .map(
-            user ->
-                new UserDto(
-                    user.getId(), user.getFirstName(), user.getLastName(), user.getEmail()));
+        .log("Fetched the user from db")
+        .map(userMapper::userToUserDto)
+        .log("Mapped user to userDto");
   }
 }

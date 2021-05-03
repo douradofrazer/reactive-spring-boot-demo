@@ -1,9 +1,12 @@
 package com.devfraz.reactivedemo.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.time.Instant;
 
 @Data
 @Table("users")
@@ -19,5 +22,7 @@ public class User {
   @Column("email")
   private String email;
 
-  private AuditMetadata auditMetadata;
+  @CreatedDate
+  @Column("created_on")
+  private Instant createdOn;
 }
