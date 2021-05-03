@@ -11,9 +11,11 @@ This is a demo to test out reactive spring boot.
 - Flyway
 - Docker
 - OpenApi/Swagger
+- Junit 5
 
 ### Prerequisites:
 
+- Java 11
 - Docker needs to be installed.
 
 ### Set-up Steps:
@@ -26,4 +28,4 @@ This is a demo to test out reactive spring boot.
 
 ### API Documentation:
 
- - [Open API](http://localhost:8080/swagger-ui.html) - Only accessible once the demo service is up.
+ - [Open API / Swagger](http://localhost:8080/swagger-ui.html) - Only accessible once the demo service is up.
